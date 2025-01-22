@@ -25,12 +25,14 @@ const db = {
     ]
 }
 
+
+// урок(11)
+
 app.get('/', (req, res) => {
   let helloMessage = "Hello incubator. I could make it"
     res.send(helloMessage)
 
 })
-
 app.get('/courses',(req, res)=>{
     let foundCourses = db.courses;
     if(req.query.title){
@@ -87,7 +89,7 @@ app.put('/courses/:id',(req, res)=>{
     const foundCourses = db.courses.find(c => c.id === +req.params.id)
 
     if (!foundCourses){
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return;
     }
 
@@ -96,6 +98,19 @@ app.put('/courses/:id',(req, res)=>{
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 
 })
+
+// новый урок(12), новые endpoints
+const products =[{title:"tomato"},{title:"oranges"}];
+const adresses= [{title:"Nezalejnasti 12"},{title:"Selickogo 11"}];
+
+app.get('/products',(req,res)=>{
+    res.send(products);
+})
+app.get('/adresses',(req,res)=>{
+    res.send(adresses);
+})
+
+
 
 
 app.listen(port, () => {
