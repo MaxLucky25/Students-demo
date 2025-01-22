@@ -100,11 +100,15 @@ app.put('/courses/:id',(req, res)=>{
 })
 
 // новый урок(12), новые endpoints
-const products =[{title:"tomato"},{title:"oranges"}];
+const products =[{title:"tomato"},{title:"orange"}];
 const adresses= [{title:"Nezalejnasti 12"},{title:"Selickogo 11"}];
 
 app.get('/products',(req,res)=>{
     res.send(products);
+})
+app.get('/products/:productTitle',(req,res)=>{
+    let product = products.find(p=>p.title === req.params.productTitle)
+    res.send(product);
 })
 app.get('/adresses',(req,res)=>{
     res.send(adresses);
