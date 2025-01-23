@@ -113,7 +113,21 @@ app.get("/products",(req,res)=>{
 })
 app.get("/products/:id",(req, res)=>{
     let product = products.find(p=>p.id === +req.params.id)
-    res.send(product);
+    if(product){
+        res.send(product);
+    }else{
+        res.send(404);
+    }
+})
+app.delete("/products/:id",(req, res)=>{
+    for(let i =0; i<products.length; i++){
+        if(products[i].id === +req.params.id){
+            products.splice(i,1);
+            res.send(204);
+            return;
+        }
+    }
+    res.send(404);
 })
 app.get("/addresses",(req, res)=>{
     res.send(adresses);
