@@ -100,14 +100,19 @@ app.put("/courses/:id",(req, res)=>{
 })
 
 // новый урок(12), новые endpoints
-const products =[{title:"tomato"},{title:"orange"}];
+const products =[{id:1, title:"tomato"},{id:2, title:"orange"}];
 const adresses= [{id:1, title:"Nezalejnasti 12"},{id:2, title:"Selickogo 11"}];
 
 app.get("/products",(req,res)=>{
-    res.send(products);
+    if(req.query.title){
+        let searchString = req.query.title.toString();
+        res.send(products.filter(c => c.title.indexOf(searchString) > -1));
+    }else {
+        res.send(products);
+    }
 })
-app.get("/products/:productTitle",(req,res)=>{
-    let product = products.find(p=>p.title === req.params.productTitle)
+app.get("/products/:id",(req, res)=>{
+    let product = products.find(p=>p.id === +req.params.id)
     res.send(product);
 })
 app.get("/addresses",(req, res)=>{
